@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Task2</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+      
+      var firstName = prompt('Введите Ваше имя:', '');
+
+      while (!firstName) {
+              firstName = prompt('Вы не ввели имя. Пожалуйста, введите Ваше имя:', '');
+      }
+
+      var lastName = prompt('Введите Вашу фамилию:', '');
+
+      while (!lastName) {
+              lastName = prompt('Вы не ввели фамилию. Пожалуйста, введите Вашу фамилию:', '');
+      }
+
+      var patronymicName = prompt('Введите Ваше отчество:', '');
+
+      while (!patronymicName) {
+              patronymicName = prompt('Вы не ввели отчество. Пожалуйста, введите Ваше отчество:', '');
+      }
+
+      var age = parseInt(prompt('Введите Ваш возраст:', ''), 10);
+
+      while (!age || age >= 100 || age <= 0) {
+              age = parseInt(prompt('Пожалуйста, введите Ваш возраст корректно:', ''), 10);
+      }
+
+      var gender = confirm('Ваш пол - мужской?');
+      var pension = false;
+
+      if (gender && (age >= 63)) {
+          pension = true;
+      } else if (!gender && (age >= 58)) {
+          pension = true;
+      }
+
+      var fullName = lastName + ' ' + firstName + ' ' + patronymicName;
+      var ageInDays = Math.floor(age * 365.2425);
+      var ageInFiveYears = age + 5;
+
+      gender = (gender) ? 'мужской' : 'женский';
+      pension = (pension) ? 'да' : 'нет';  
+
+      var userInfo = 'ваше ФИО: ' + fullName + '\n' +
+          'ваш возраст в годах: ' + age + '\n' +
+          'ваш возраст в днях: ' + ageInDays + '\n' +
+          'через 5 лет вам будет: ' + ageInFiveYears + '\n' +
+          'ваш пол: ' + gender + '\n' +
+          'вы на пенсии: ' + pension;
+
+      alert(userInfo);
+    </script>  
+  </body>
+</html>
