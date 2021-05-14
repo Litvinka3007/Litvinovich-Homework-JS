@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Task1</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+      
+      function findVowels(str) {
+        var counter = 0;
+        var vowels = ['а', 'у', 'о', 'ы', 'и', 'э', 'я', 'ю', 'ё', 'е'];
+      
+        for (let char of str.toLowerCase()) {
+          if (vowels.includes(char)) {
+            counter += 1;
+          }
+        }
+      
+        return counter;
+      }
+
+      console.log('Во введённой пользователем строке гласных букв ' + findVowels(prompt('Введите строку: ', '')));
+    </script>  
+  </body>
+</html>
