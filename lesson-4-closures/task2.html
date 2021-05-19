@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Task2</title>
+</head>
+<body>
+  <script>
+    "use strict";
+
+    function deleteClass(obj, cls) {
+      var arr = obj.className.split(' ');
+
+      for (var i = 0; i < arr.length; i++) {
+        if (arr[i] == cls) {
+          arr.splice(i, 1);
+          i--;
+        }
+      }
+      obj.className = arr.join(' ');
+    }
+
+    var obj = {
+      className: 'my menu menu open'
+    };
+
+    deleteClass(obj, 'blabla');
+    deleteClass(obj, 'menu');
+    console.log(obj.className);
+
+  </script>
+</body>
+</html>
