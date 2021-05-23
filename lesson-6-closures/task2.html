@@ -10,13 +10,15 @@
 
     function interviewQuestion(profession) {
       return function(name) {
+        var result;
         if (profession === 'designer') {
-          return (name + ' can you please explain what UX design is?');
+          result = (name + ' can you please explain what UX design is?');
         } else if (profession === 'teacher') {
-          return ('What subject do you teach ' + name + '?');
+          result = ('What subject do you teach ' + name + '?');
         } else {
-          return ('Hello ' + name + ', what do you do?');
+          result = ('Hello ' + name + ', what do you do?');
         }
+        return result;
       }
     }
 
