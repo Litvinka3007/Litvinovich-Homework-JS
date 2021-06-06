@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link type="text/css" rel="stylesheet" href="style.css">
+  <title>Drinks</title>
+</head>
+<body>
+  <div class="container">
+    <div class="buttons">
+      <button id='add-drink'>Add a new drink to the menu</button>
+      <button id='get-drink-info'>Get info about a drink</button>
+      <button id='delete-drink'>Remove a drink from the menu</button>
+      <button id='show-menu'>Show drinks menu</button>
+    </div>
+    <div class ="content"></div>
+  </div>
+
+  <script src="hashStorage.js"></script>
+  <script>
+    'use strict';
+
+    var drinkStorage = new THashStorage();
+
+    document.getElementById('add-drink').addEventListener('click', function() {
+      addDrink();
+    })
+
+    function addDrink() {
+      var drink = {};
+
+      var name = prompt('Enter name of the drink').toLowerCase().trim();
+
+      if (name) {
+        drink.isAlcohol = confirm('Does the drink contain alcohol?') ? 'Yes' : 'No';
+        if (drink.isAlcohol === true) {
+          drink.isAlcohol = 'Yes';
+        } else {
+          drink.isAlcohol = 'No';
+        }
+
+        drink.recipe = prompt('Enter the recipe of the drink');
+
+        return drinkStorage.addValue(name, drink);
+
+      } else {
+        alert('You have not added anything yet');
+      }
+    }
+
+    document.getElementById('get-drink-info').addEventListener('click', function() {
+      getInfo();
+    })
+
+    function getInfo() {
+      var name = prompt('What drink are you interested in?').toLowerCase().trim();
+      var getDrinkInfo;
+
+      if (name) {
+        getDrinkInfo = drinkStorage.getValue(name);
+      } else {
+        getDrinkInfo = null;
+      }
+
+      var result = '';
+
+      if (getDrinkInfo) {
+        var nameDrink = 'Drink: ' + name + '<br>';
+        var containAlcohol = 'Alcoholic: ' + getDrinkInfo.isAlcohol + '<br>';
+        var recipe = 'Ingredients: ' + getDrinkInfo.recipe + '<br>';
+
+        result = nameDrink + containAlcohol + recipe;
+
+      } else {
+        result = 'Unfortunately this drink is not on the menu';
+      }
+
+      document.querySelector('.content').innerHTML = result;
+    }
+
+    document.getElementById('delete-drink').addEventListener('click', function() {
+      deleteDrink();
+    })
+
+    function deleteDrink() {
+      var name = prompt('Which drink would you like to remove from the menu?').toLowerCase().trim();
+      var removeDrink = drinkStorage.deleteValue(name);
+      var result = '';
+
+      if (removeDrink) {
+        result = name + ' is removed from the menu';
+      } else {
+        result = 'This drink is not on the menu';
+      }
+
+      document.querySelector('.content').innerHTML = result;
+    }
+
+    document.getElementById('show-menu').addEventListener('click', function() {
+      showDrinksMenu();
+    })
+
+    function showDrinksMenu() {
+      var showMenu = drinkStorage.getKeys();
+      var result = '';
+
+      if (showMenu.length) {
+        for (var i = 0; i < showMenu.length; i++) {
+          result += (i + 1) + '. ' + showMenu[i] + '</br>';
+        }
+      } else {
+        result = 'The bar is empty =(';
+      }
+
+      document.querySelector('.content').innerHTML = result;
+    }
+
+  </script>
+</body>
+</html>
