@@ -21,6 +21,7 @@
     'use strict';
 
     var drinkStorage = new THashStorage();
+    var content = document.querySelector('.content');
 
     document.getElementById('add-drink').addEventListener('click', function() {
       addDrink();
@@ -75,7 +76,7 @@
         result = 'Unfortunately this drink is not on the menu';
       }
 
-      document.querySelector('.content').innerHTML = result;
+      content.innerHTML = result;
     }
 
     document.getElementById('delete-drink').addEventListener('click', function() {
@@ -93,7 +94,7 @@
         result = 'This drink is not on the menu';
       }
 
-      document.querySelector('.content').innerHTML = result;
+      content.innerHTML = result;
     }
 
     document.getElementById('show-menu').addEventListener('click', function() {
@@ -112,7 +113,7 @@
         result = 'The bar is empty =(';
       }
 
-      document.querySelector('.content').innerHTML = result;
+      content.innerHTML = result;
     }
 
   </script>
