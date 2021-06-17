@@ -1,0 +1,199 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.clock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: powderblue;
+}
+
+.analog-clock {
+  position: relative;
+  background-color: cornflowerblue;
+  width: 30vw;
+  height: 30vw;
+  border-radius: 100%;
+}
+
+.analog-clock__hands {
+  position: absolute;
+  width: 5%;
+  height: 5%;
+  left: calc(50% - 5% / 2);
+  top: calc(50% - 5% / 2);
+  background-color: black;
+  border-radius: 100%;
+  z-index: 10;
+  transform: rotateZ(-90deg);
+}
+
+.analog-clock__second-hand {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.analog-clock__second-hand:before {
+  content: '';
+  display: inline-block;
+  background-color: white;
+  width: 12vw;
+  height: 5px;
+  position: absolute;
+  top: calc(50% - 5px / 2);
+}
+
+.analog-clock__second-hand:after {
+  content: '';
+  display: inline-block;
+  background-color: aliceblue;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: calc(50% - 20px / 2);
+  left: calc(50% - 20px / 2);
+  border-radius: 100%;
+}
+
+.analog-clock__minute-hand {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.analog-clock__minute-hand:before {
+  content: '';
+  display: inline-block;
+  background-color: dodgerblue;
+  width: 10vw;
+  height: 7px;
+  position: absolute;
+  top: calc(50% - 7px / 2);
+}
+
+.analog-clock__hour-hand {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.analog-clock__hour-hand:before {
+  content: '';
+  display: inline-block;
+  background-color: skyblue;
+  width: 8vw;
+  height: 9px;
+  position: absolute;
+  top: calc(50% - 9px / 2);
+}
+
+.digital-clock {
+  position: absolute;
+  left: calc(50% - 30% / 2);
+  top: 25%;
+  display: flex;
+  flex-direction: row;
+  width: 30%;
+  height: 10%;
+  background-color: lightsteelblue;
+}
+
+.digital-clock > * {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: cursive;
+}
+
+.digital-clock__hours {
+  flex: 1;
+}
+
+.digital-clock__minutes {
+  flex: 1;
+  border-left: 1px solid aliceblue;
+  border-right: 1px solid aliceblue;
+}
+
+.digital-clock__seconds {
+  flex: 1;
+}
+
+.analog-clock-numbers {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.analog-clock-numbers > * {
+  position: absolute;
+  top: calc(50% - 20px / 2);
+  width: 100%;
+  height: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px 0 10px;
+}
+
+.analog-clock-numbers > * > * {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  width: 30px;
+  padding: 15px;
+  background-color: aliceblue;
+  border-radius: 100%;
+  transform: rotateZ(0deg);
+}
+
+.analog-clock-numbers__1-7 {
+  transform: rotateZ(-60deg);
+}
+
+.analog-clock-numbers__1-7 > * {
+  transform: rotateZ(60deg);
+}
+
+.analog-clock-numbers__2-8 {
+  transform: rotateZ(-30deg);
+}
+
+.analog-clock-numbers__2-8 > * {
+  transform: rotateZ(30deg);
+}
+
+.analog-clock-numbers__3-9 {
+  /*transform: rotateZ(0deg);*/
+}
+
+.analog-clock-numbers__4-10 {
+  transform: rotateZ(30deg);
+}
+
+.analog-clock-numbers__4-10 > * {
+  transform: rotateZ(-30deg);
+}
+
+.analog-clock-numbers__5-11 {
+  transform: rotateZ(60deg);
+}
+
+.analog-clock-numbers__5-11 > * {
+  transform: rotateZ(-60deg);
+}
+
+.analog-clock-numbers__6-12 {
+  transform: rotateZ(90deg);
+}
+
+.analog-clock-numbers__6-12 > * {
+  transform: rotateZ(-90deg);
+}
