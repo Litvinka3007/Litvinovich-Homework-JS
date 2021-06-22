@@ -1,0 +1,15 @@
+body,
+html {
+  padding: 0;
+  margin: 0;
+}
+
+#wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #4b6cb7;
+  background: -webkit-linear-gradient(to bottom, #A5C3CF, #4D648D);
+  background: linear-gradient(to bottom, #A5C3CF,  #4D648D);
+}
