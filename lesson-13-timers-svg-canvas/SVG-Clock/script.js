@@ -1,6 +1,6 @@
 'use strict';
 
-var baseRadius = 400; // радиус циферблата
+var baseRadius = 600; // радиус циферблата
 var numbersBaseRadius = baseRadius / 2.5; // радиус оси цифр циферблата
 var hourHandLength = baseRadius / 4; // длина часовой стрелки
 var minuteHandLength = baseRadius / 3.5; // длина минутной стрелки
@@ -81,7 +81,7 @@ function createHourNumbers(circleX, circleY, number) {
   num.setAttribute('text-anchor', 'middle');
   num.setAttribute('stroke', 'black');
   num.setAttribute('stroke-width', '1');
-  num.setAttribute('dominant-baseline', 'middle');
+  num.setAttribute('dominant-baseline', 'central');
   num.setAttribute('font-size', numberInCircleSize);
   num.textContent = number;
 
