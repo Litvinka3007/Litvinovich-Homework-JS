@@ -1,136 +1,139 @@
 'use strict';
 
-const canvas = document.getElementById('canvas');
-const base = canvas.getContext('2d');
+var canvas = document.getElementById('canvas');
+var ctx = canvas.getContext('2d');
 canvas.width = canvas.height = 600;
 
-const baseRadius = canvas.width / 2;  // радиус canvas
-base.translate(baseRadius, baseRadius); // центр canvas
-const clockRadius = baseRadius * 0.95; // радиус циферблата
-const numbersRadius = baseRadius * 0.75; // радиус расположения цифр на циферблате
-const numCircleRadius = baseRadius * 0.11; // радиус кругов с цифрами
-const dotSize = baseRadius * 0.04; // размер точки в центре часов
-const fontSize = clockRadius * 0.1 + 'px Arial';// размер шрифта
-const digitalClockWidth = baseRadius / 1.5; // ширина цифровых часов
-const digitalClockHeight = baseRadius / 6; // высота цифровых часов
+var radius = canvas.height / 2; // Использование высоты canvas для вычисления радиуса часов позволяет создавать часы для любого размера canvas
+ctx.translate(radius, radius); // Задаю (0,0) позицию часов в центре canvas
+radius = radius * 0.90; // Уменьшаю радиус часов на 10% для лучшей отрисовки часов внутри canvas
 
-setInterval(createClock, 0);
+var circlesRadius = 30; // Радиус кругов с цифрами
+var numbersBaseRadius = radius / 1.3; // Радиус оси цифр циферблата
+var dotSizeRadius = radius * 0.03; // Радиус точки в центре циферблата
+var digitalClockWidth = radius / 1.5; // Ширина цифровых часов
+var digitalClockHeight = radius / 5; // Высота цифровых часов
 
 // UI
 
-function createClock() {
-  createClockFace();
-  createDigitalClock();
-  createDecorativeDot(dotSize);
-  updateTime();
+function drawClock() {
+  drawFace(ctx, radius);
+  drawDigitalClock();
+  updateTime(ctx, radius);
 }
 
-function createClockFace() {
-  base.save();
-  base.beginPath();
-  base.arc(0, 0, clockRadius, 0, 2 * Math.PI);
-  base.fillStyle = '#FA6775';
-  base.strokeStyle = '#F52549';
-  base.lineWidth = 15;
-  base.fill();
-  base.stroke();
+function drawFace(ctx, radius) {
+  ctx.save();
+  ctx.beginPath(); // Создаю основу циферблата
+  ctx.arc(0, 0, radius, 0, 2 * Math.PI);
+  ctx.fillStyle = 'white';
+  ctx.strokeStyle = 'pink';
+  ctx.lineWidth = radius * 0.1;
+  ctx.fill();
+  ctx.stroke();
 
-  for (let number = 1; number <= 12; number++) {
+  ctx.beginPath(); // Создаю точку в центре циферблата
+  ctx.arc(0, 0, dotSizeRadius, 0, 2 * Math.PI);
+  ctx.fillStyle = 'black';
+  ctx.fill();
+  ctx.restore();
+
+  for (var number = 1; number <= 12; number++) { // Создаю цифры и кружочки по кругу циферблата
     var angle = number / 12 * Math.PI * 2;
-    var x = ((clockRadius - numbersRadius) / 2 - dotSize * 2.5) + Math.round(Math.sin(angle) * numbersRadius);
-    var y = ((clockRadius - numbersRadius) / 2 - dotSize * 2.5) - Math.round(Math.cos(angle) * numbersRadius);
+    var x = ((radius - numbersBaseRadius) / 2 - dotSizeRadius * 3.9) + Math.round(Math.sin(angle) * numbersBaseRadius);
+    var y = ((radius - numbersBaseRadius) / 2 - dotSizeRadius * 3.9) - Math.round(Math.cos(angle) * numbersBaseRadius);
     createHourCircle(x, y);
     createHourNumbers(number, x, y);
   }
-
-  base.restore();
 }
 
 function createHourCircle(x, y) {
-  base.save();
-  base.fillStyle = 'white';
-  base.strokeStyle = '#F52549';
-  base.lineWidth = '1';
-  base.beginPath();
-  base.arc(x, y, numCircleRadius, 0, 2 * Math.PI);
-  base.fill();
-  base.stroke();
-  base.restore();
+  ctx.save();
+  ctx.fillStyle = 'pink';
+  ctx.strokeStyle = '#F52549';
+  ctx.lineWidth = '1';
+  ctx.beginPath();
+  ctx.arc(x, y, circlesRadius, 0, 2 * Math.PI);
+  ctx.fill();
+  ctx.stroke();
+  ctx.restore();
 }
 
 function createHourNumbers(number, x, y) {
-  base.save();
-  base.font = fontSize;
-  base.fillStyle = 'black';
-  base.textBaseline = 'middle';
-  base.textAlign = 'center';
-  base.fillText(number, x, y);
-  base.restore();
+  ctx.save();
+  ctx.font = radius * 0.15 + 'px arial';
+  ctx.fillStyle = 'black';
+  ctx.textBaseline = 'middle';
+  ctx.textAlign = 'center';
+  ctx.fillText(number, x, y);
+  ctx.restore();
 }
 
-function createArrow(angel, arrowWidth, arrowLength) {
-  base.save();
-  base.beginPath();
-  base.strokeStyle = 'black';
-  base.lineWidth = arrowWidth;
-  base.lineCap = 'round';
-  base.moveTo(0, 0);
-  base.rotate(angel);
-  base.lineTo(0, -arrowLength);
-  base.stroke();
-  base.rotate(-angel);
-  base.restore();
+function drawHand(ctx, pos, length, width) {
+  ctx.save();
+  ctx.beginPath();
+  ctx.lineWidth = width;
+  ctx.lineCap = 'round';
+  ctx.moveTo(0,0);
+  ctx.rotate(pos);
+  ctx.lineTo(0, -length);
+  ctx.stroke();
+  ctx.rotate(-pos);
+  ctx.restore();
 }
 
-function createDecorativeDot(size) {
-  base.save();
-  base.beginPath();
-  base.arc(0, 0, size, 0, 2 * Math.PI);
-  base.fillStyle = 'black';
-  base.fill();
-  base.restore();
-}
+function drawDigitalClock() {
+  ctx.save();
+  ctx.beginPath();
+  ctx.strokeStyle = 'pink';
+  ctx.lineWidth = radius * 0.02;
+  ctx.strokeRect(-digitalClockWidth / 2, -digitalClockHeight * 2.3, digitalClockWidth, digitalClockHeight);
+  ctx.restore();
 
-function createDigitalClock() {
-  base.save();
-  base.beginPath();
-  base.fillStyle = '#FEF3E2';
-  base.rect(-digitalClockWidth / 2, digitalClockHeight, digitalClockWidth, digitalClockHeight);
-  base.fill();
-  base.restore();
   createDigitalNumbers();
 }
 
 function createDigitalNumbers() {
-  base.save();
-  base.font = fontSize;
-  base.fillStyle = 'black';
-  base.textAlign = 'center';
-  base.textBaseline = 'middle';
-  base.fillText(updateDigitalClock(), 0, digitalClockHeight * 1.5);
-  base.restore();
+  ctx.save();
+  ctx.font = radius * 0.15 + 'px arial';
+  ctx.fillStyle = 'black';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(updateDigitalClock(), 0, -digitalClockHeight * 1.75);
+  ctx.restore();
 }
 
 // Logic
 
-function updateTime() {
-  var now = new Date();
-  var hour = now.getHours();
-  var minute = now.getMinutes();
-  var second = now.getSeconds();
+function updateTime(ctx, radius) {
+  var time = new Date();
+  var hour = time.getHours();
+  var minute = time.getMinutes();
+  var second = time.getSeconds();
 
-  var thisHourRotate = (hour * Math.PI / 6 ) + (minute * Math.PI / (6 * 60));
-  createArrow(thisHourRotate, clockRadius * 0.025, clockRadius * 0.5);
+  //hour
+  hour = hour % 12;
+  hour = (hour * Math.PI / 6) + (minute * Math.PI / (6 * 60)) + (second * Math.PI / (360 * 60));
+  drawHand(ctx, hour, radius * 0.5, radius * 0.025);
 
-  var thisMinuteRotate = (minute * Math.PI / 30);
-  createArrow(thisMinuteRotate, clockRadius * 0.015, clockRadius * 0.6);
+  //minute
+  minute = (minute * Math.PI / 30) + (second * Math.PI / (30 * 60));
+  drawHand(ctx, minute, radius * 0.6, radius * 0.015);
 
-  var thisSecondRotate = second * Math.PI / 30;
-  createArrow(thisSecondRotate, clockRadius * 0.008, clockRadius * 0.7);
+  // second
+  second = (second * Math.PI / 30);
+  drawHand(ctx, second, radius * 0.8, radius * 0.008);
 }
 
 function updateDigitalClock() {
-  var now = new Date();
-  var time = now.toLocaleTimeString();
-  return time;
+  var time = new Date();
+  var digitalTime = time.toLocaleTimeString();
+  return digitalTime;
 }
+
+function animate() {
+  drawClock();
+  requestAnimationFrame(animate);
+}
+
+requestAnimationFrame(animate);
