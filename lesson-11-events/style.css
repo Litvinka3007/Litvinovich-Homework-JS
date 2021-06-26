@@ -1,0 +1,41 @@
+.borderWrapper {
+  border: 1px solid black;
+  height: 400px;
+  width: 1300px;
+  margin-top: 50px;
+  margin-left: 20px;
+}
+
+img {
+  height: 150px;
+}
+
+#image1 {
+  position: fixed;
+  top: 60px;
+  left: 30px;
+}
+
+#image2 {
+  position: fixed;
+  top: 60px;
+  left: 130px;
+}
+
+#image3{
+  position: fixed;
+  top: 60px;
+  left: 260px;
+}
+
+#image4 {
+  position: fixed;
+  top: 60px;
+  left: 490px;
+}
+
+#image5 {
+  position: fixed;
+  top: 60px;
+  left: 760px;
+}
