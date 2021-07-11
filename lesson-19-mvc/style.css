@@ -1,0 +1,32 @@
+body {
+  margin: 2em auto;
+  width: 90%;
+  font-family: "Open Sans", serif;
+  font-size: 0.8em;
+}
+
+.manage-drinks > * {
+  display: block;
+}
+
+.manage-drinks .drink-info {
+  margin: 0.5em auto;
+  width: 95%;
+  max-width: 320px;
+  color: black;
+}
+
+input {
+  margin: 0.5em auto;
+  padding: 0.5em 1em;
+  width: 95%;
+  max-width: 320px;
+  border: 1px solid slategrey;
+  color: white;
+  background: darkslategray;
+  cursor: pointer;
+}
+
+input:hover {
+  color: #eee;
+}

@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Task1</title>
+</head>
+<body>
+  <div class="manage-drinks">
+    <input type='button' value='Добавить напиток' onclick='addDrink()'>
+    <input type='button' value='Показать информацию о напитке' onclick='showDrinkInfo()'>
+    <input type='button' value='Удалить напиток' onclick='removeDrink()'>
+    <input type='button' value='Показать меню напитков' onclick='showDrinksMenu()'>
+    <div id="message" class="drink-info"></div>
+  </div>
+  <script src="hashStorage.js"></script>
+  <script>
+    'use strict';
+
+    var drinkStorage = new THashStorage();
+
+    function addDrink() {
+      var drinkName = prompt('Введите название напитка', 'Test Drink').toLowerCase().trim();
+      var fHash = {};
+
+      if (drinkName) {
+        fHash.recipe = prompt('Введите рецепт приготовления напитка', 'Test Recipe');
+        fHash.alcohol = confirm('Ваш напиток алкогольный?') ? 'да' : 'нет';
+        return drinkStorage.addValue(drinkName, fHash);
+      } else {
+        alert('Ввод отменен!')
+      }
+    }
+
+    function showDrinkInfo() {
+      var drinkName = prompt('Введите название напитка: ','').toLowerCase().trim();
+      var getDrinkInfo = (drinkName) ? drinkStorage.getValue(drinkName) : 0;
+      var resultHTML = '';
+
+      if (getDrinkInfo) {
+        var print1 = 'Напиток: ' + drinkName + '<br>';
+        var print2 = 'Алкогольный: ' + getDrinkInfo.alcohol + '<br>';
+        var print3 = 'Рецепт приготовления: ' + getDrinkInfo.recipe + '<br>';
+
+        resultHTML = print1 + print2 + print3;
+      } else {
+        resultHTML = 'Ошибка! Нет такого напитка';
+      }
+      document.getElementById('message').innerHTML = resultHTML;
+    }
+
+    function removeDrink() {
+      var drinkName = prompt('Какой напиток удалить?').toLowerCase().trim();
+      var delDrinkInfo = drinkStorage.deleteValue(drinkName);
+      var resultHTML = '';
+
+      if (delDrinkInfo) {
+        resultHTML = 'Информация о напитке ' + drinkName + ' удалена';
+      } else {
+        resultHTML = 'Ошибка! Нет такого напитка';
+      }
+      document.getElementById('message').innerHTML = resultHTML;
+    }
+
+    function showDrinksMenu() {
+      var showMenuInfo = drinkStorage.getKeys();
+      var resultHTML = '';
+
+      if (showMenuInfo.length) {
+        for (var i = 0; i < showMenuInfo.length; i++) {
+          resultHTML += (i + 1) + '. ' + showMenuInfo[i] + '<br>';
+        }
+      } else {
+        resultHTML = 'Меню пустое, добавьте напитки.';
+      }
+      document.getElementById('message').innerHTML = resultHTML;
+    }
+  </script>
+</body>
+</html>
