@@ -5,22 +5,35 @@ body {
   font-size: 0.8em;
 }
 
+main {
+  display: flex;
+  justify-content: space-around;
+}
+
 .manage-drinks > * {
+  display: block;
+}
+
+.manage-dishes > * {
   display: block;
 }
 
 .manage-drinks .drink-info {
   margin: 0.5em auto;
-  width: 95%;
-  max-width: 320px;
+  width: 100%;
+  color: black;
+}
+
+.manage-dishes .dishes-info {
+  margin: 0.5em auto;
+  width: 100%;
   color: black;
 }
 
 input {
   margin: 0.5em auto;
   padding: 0.5em 1em;
-  width: 95%;
-  max-width: 320px;
+  width: 100%;
   border: 1px solid slategrey;
   color: white;
   background: darkslategray;
