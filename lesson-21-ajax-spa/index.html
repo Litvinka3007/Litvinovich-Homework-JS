@@ -8,31 +8,31 @@
   <script src="AJAXStorage.js"></script>
 </head>
 <body>
-  <section class="wrapper">
-    <div id="info"></div>
-    <form>
+  <div class="container">
+    <form class="buttons">
       <input
-              class="buttons create"
+              class="button"
               type="submit"
               value="Добавить напиток"
               onclick="createRecipe(); return false;">
       <input
-              class="buttons get-recipe"
+              class="button"
               type="submit"
               value="Найти рецепт напитка"
               onclick="getInformation(); return false;">
       <input
-              class="buttons delete"
+              class="button"
               type="submit"
               value="Убрать напиток из меню"
               onclick="deleteDrink(); return false;">
       <input
-              class="buttons get-drinks"
+              class="button"
               type="submit"
               value="Показать меню напитков"
               onclick="showAllDrinks(); return false;">
     </form>
-  </section>
+    <div class="content" id="info"></div>
+  </div>
   <script>
     'use strict';
 
@@ -112,16 +112,17 @@
     }
 
     function showAllDrinks() {
-      var allDrinks;
-      var message;
+      var allDrinks = drinkStorage.getKeys();
+      var message = '';
 
-      if (drinkStorage.getKeys().length !== 0) {
-        allDrinks = drinkStorage.getKeys();
+      if (allDrinks.length !== 0) {
+        for (var i = 0; i < allDrinks.length; i++) {
+          message += (i + 1) + '. ' + allDrinks[i] + '<br>';
+        }
       } else {
-        allDrinks = 'Бар пуст. Пополните бар!';
+        message = 'Бар пуст. Пополните бар!';
       }
 
-      message = allDrinks.join(', ');
       document.getElementById('info').innerHTML = message;
     }
   </script>
