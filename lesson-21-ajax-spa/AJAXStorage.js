@@ -1,11 +1,11 @@
 'use strict';
 
-var ajaxStorageAddress = 'http://fe.it-academy.by/AjaxStringStorage2.php';
-
 function TAJAXStorage(AjaxStorageKey) {
   var self = this;
-  var UpdatePassword;
-  var lHash = {};
+  var UpdatePassword; // Переменная для хранения сгенерированного пароля при выполнении операций 'LOCKGET' и 'UPDATE'
+  var lHash = {};     // Локальное хранилище
+
+  var ajaxStorageAddress = 'http://fe.it-academy.by/AjaxStringStorage2.php'; // Ссылка на сервер, url в наших запросах
 
   self.checkAjaxStorage = function() {
     $.ajax({
@@ -37,7 +37,7 @@ function TAJAXStorage(AjaxStorageKey) {
     });
   };
 
-  self.lockStorage = function() {
+  self.lockStorage = function() { // Получаем свежие данные с сервера и блокируем на 1 минуту для последующего изменения командой UPDATE
     UpdatePassword = Math.random();
 
     $.ajax({
@@ -53,7 +53,7 @@ function TAJAXStorage(AjaxStorageKey) {
     })
   };
 
-  self.updateStorage = function() { // обн-ые данные из лок-го хэша сохр-ся в сервис с указанием того же пароля, который был сген-н при операции "LOCKGET"
+  self.updateStorage = function() { // Обн-ые данные из лок-го хэша сохр-ся на сервере с указанием того же пароля, который был сген-н при операции "LOCKGET"
     $.ajax({
       url: ajaxStorageAddress,
       type: 'POST',
@@ -71,8 +71,8 @@ function TAJAXStorage(AjaxStorageKey) {
   self.addValue = function(key, value) {
     lHash[key] = value;
     console.log(lHash);
-    this.lockStorage();
-    this.updateStorage();
+    self.lockStorage();
+    self.updateStorage();
   };
 
   self.getValue = function(key) {
