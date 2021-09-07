@@ -1,0 +1,82 @@
+#section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin: 0;
+  width: 100%;
+  height: 600px;
+}
+
+#scorePanelID {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0;
+  width: 600px;
+  height: 100px;
+}
+
+#startBtn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 0 1 150px;
+  margin: 0;
+  padding: 10px;
+  height: 35px;
+  border-radius: 10px;
+  outline: none;
+  background-color: thistle;
+  color: #000;
+  font-family: Comic Sans MS, Comic Sans, cursive, serif;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+#pointsTable {
+  margin-left: 105px;
+  font-weight: 700;
+}
+
+span {
+    font-size: 65px;
+}
+
+#playingArea {
+  position: relative;
+  box-sizing: border-box;
+  margin: 0;
+  border: solid rgb(95, 92, 92) 1px;
+  background-color: lemonchiffon;
+}
+
+#ball {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: red;
+}
+
+.paddle {
+  position: absolute;
+  top: 129.5px;
+  width: 15px;
+  height: 150px;
+}
+
+#paddle1 {
+  left: 0;
+  background-color: green;
+}
+
+#paddle2 {
+  right: 0;
+  background-color: blue;
+}
