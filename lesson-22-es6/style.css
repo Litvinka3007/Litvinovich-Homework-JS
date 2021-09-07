@@ -1,0 +1,37 @@
+body {
+  padding-right: 40px;
+  overflow: hidden;
+}
+
+#wrapper h1 {
+  text-align: center;
+}
+
+#wrapper div {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  text-align: left;
+  height: 300px;
+  margin: 0 auto;
+}
+
+#contents {
+  text-align: center;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.menu {
+  float: left;
+  margin-right: 30px;
+  width: max-content;
+  height: 100vh;
+}
+
+p {
+  text-indent: 40px;
+}
